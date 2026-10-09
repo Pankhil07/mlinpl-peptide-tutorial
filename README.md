@@ -1,8 +1,8 @@
-# Controllable Generative AI for Sequence Design
+# Controllable Generative Design of Biological Sequences
 
 ### Steering a peptide language model toward antimicrobial activity
 
-**ML in PL 2025 — hands-on tutorial (25 min)**
+**ML in PL 2026 — hands-on tutorial (25 min)**
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pankhil07/mlinpl-peptide-tutorial/blob/main/mlinpl-controllable-peptide-design.ipynb)
 
