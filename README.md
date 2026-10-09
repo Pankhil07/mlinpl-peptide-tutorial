@@ -31,7 +31,13 @@ Target property: **MIC** (minimum inhibitory concentration) against
 | 4 | **Knob 2** — a property predictor sharing the generator's backbone |
 | 5 | **Knob 3** — best-of-k selection, and the potency↔diversity trade |
 | 6 | **Knob 4** — fine-tuning on the winners, so the *distribution* moves |
-| 7 | Evaluation and failure modes: Goodhart, OOD, absent uncertainty |
+| 7 | **Knob 5** — oracle-guided search (TASAR), steering *during* generation |
+| 8 | Evaluation and failure modes: Goodhart, OOD, absent uncertainty |
+
+Knobs 1–4 all let the model finish a sequence before the oracle speaks. TASAR
+puts the oracle *inside* generation: stochastic beam search without replacement,
+with the tree's log-probabilities reweighted by each sequence's advantage, so
+every oracle call informs the next.
 
 The last section is the point of the tutorial, not an appendix. Every number
 the notebook produces is a model prediction, and §7 is about how to stay honest
@@ -69,7 +75,8 @@ The notebook downloads them automatically.
 ## What's in this repo
 
 The notebook, plus the minimum subset of the Hyformer package it needs to run
-(model, amino-acid tokenizer, configs). It is a teaching copy, trimmed for a
+(model, amino-acid tokenizer, configs, the TASAR sampler and the peptide rule
+screens). It is a teaching copy, trimmed for a
 25-minute session — for the full library, the baselines, and the molecular
 experiments, use the upstream repo:
 
@@ -104,3 +111,8 @@ modelled here.
 
 See [LICENSE](LICENSE). The upstream Hyformer release and the HuggingFace
 checkpoints are BSD-3-Clause; Hyformer is © 2025 szczurek-lab.
+
+`hyformer/generators/` vendors the TASAR search. The stochastic beam search
+derives from [unique-randomizer](https://github.com/google-research/unique-randomizer)
+(Apache-2.0) via [graphxform](https://github.com/grimmlab/graphxform) (MIT);
+attribution is preserved in each file's docstring.
